@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="安装最新最热的 deepin 如果你使用了物理板卡，那么你可以在文档列表中找到对应的安装教程。如果你没有板卡那么可以参考Cherrling的教程用qemu来启动，或者在开发板漂流计划中白嫖一个。\n">
-<title>给 deepin 修包（创世篇）</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="要不，你先看看这个万能的手册？\n工作流 具体的工作流在这里中有介绍。简言之，我们只要关注有问题的包和干脆没有的包即可，如果这个包只是版本不够，那你只要找你的 mentor 然后请求升级即可，当然如果遇到了版本锁死的情况另说。\n">
+<title>给 deepin 修包（入世篇）</title>
 
-<link rel='canonical' href='https://vzstless.moe/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%88%9B%E4%B8%96%E7%AF%87/'>
+<link rel='canonical' href='https://vzstless.moe/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%85%A5%E4%B8%96%E7%AF%87/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="给 deepin 修包（创世篇）">
-<meta property='og:description' content="安装最新最热的 deepin 如果你使用了物理板卡，那么你可以在文档列表中找到对应的安装教程。如果你没有板卡那么可以参考Cherrling的教程用qemu来启动，或者在开发板漂流计划中白嫖一个。\n">
-<meta property='og:url' content='https://vzstless.moe/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%88%9B%E4%B8%96%E7%AF%87/'>
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="给 deepin 修包（入世篇）">
+<meta property='og:description' content="要不，你先看看这个万能的手册？\n工作流 具体的工作流在这里中有介绍。简言之，我们只要关注有问题的包和干脆没有的包即可，如果这个包只是版本不够，那你只要找你的 mentor 然后请求升级即可，当然如果遇到了版本锁死的情况另说。\n">
+<meta property='og:url' content='https://vzstless.moe/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%85%A5%E4%B8%96%E7%AF%87/'>
 <meta property='og:site_name' content='VZstless'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='PLCT的那些事' /><meta property='article:published_time' content='2025-10-22T15:07:02&#43;08:00'/><meta property='article:modified_time' content='2025-10-22T15:07:02&#43;08:00'/>
-<meta name="twitter:title" content="给 deepin 修包（创世篇）">
-<meta name="twitter:description" content="安装最新最热的 deepin 如果你使用了物理板卡，那么你可以在文档列表中找到对应的安装教程。如果你没有板卡那么可以参考Cherrling的教程用qemu来启动，或者在开发板漂流计划中白嫖一个。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='PLCT的那些事' /><meta property='article:published_time' content='2025-10-23T16:51:44&#43;08:00'/><meta property='article:modified_time' content='2025-10-23T16:51:44&#43;08:00'/>
+<meta name="twitter:title" content="给 deepin 修包（入世篇）">
+<meta name="twitter:description" content="要不，你先看看这个万能的手册？\n工作流 具体的工作流在这里中有介绍。简言之，我们只要关注有问题的包和干脆没有的包即可，如果这个包只是版本不够，那你只要找你的 mentor 然后请求升级即可，当然如果遇到了版本锁死的情况另说。\n">
     <link rel="shortcut icon" href="/1f365.ico" />
 
     </head>
@@ -287,9 +287,11 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#安装最新最热的-deepin">安装最新最热的 deepin</a></li>
-    <li><a href="#获取应用">获取应用</a></li>
-    <li><a href="#创建一个干净的-rootfs">创建一个干净的 rootfs</a></li>
+    <li><a href="#工作流">工作流</a></li>
+    <li><a href="#循环依赖">循环依赖</a></li>
+    <li><a href="#改动源码之后的打包流程">改动源码之后的打包流程</a></li>
+    <li><a href="#github-actions">github actions</a></li>
+    <li><a href="#新时代的千年虫">新时代的千年虫</a></li>
   </ol>
 </nav>
         </div>
@@ -309,7 +311,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%88%9B%E4%B8%96%E7%AF%87/">给 deepin 修包（创世篇）</a>
+            <a href="/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%85%A5%E4%B8%96%E7%AF%87/">给 deepin 修包（入世篇）</a>
         </h2>
     
         
@@ -331,7 +333,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-22</time>
+                <time class="article-time--published">2025-10-23</time>
             </div>
         
 
@@ -346,7 +348,7 @@
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    4 minute read
                 </time>
             </div>
         
@@ -361,37 +363,67 @@
     <section class="article-content">
     
     
-    <h2 id="安装最新最热的-deepin">安装最新最热的 deepin
-</h2><p>如果你使用了物理板卡，那么你可以在<a class="link" href="https://deepin-community.github.io/sig-deepin-ports/docs"  target="_blank" rel="noopener"
-    >文档列表</a>中找到对应的安装教程。如果你没有板卡那么可以参考<a class="link" href="https://cherr.cc/plct/init.html"  target="_blank" rel="noopener"
-    >Cherrling</a>的教程用qemu来启动，或者在<a class="link" href="https://github.com/rv2036/riscv-board-wandering"  target="_blank" rel="noopener"
-    >开发板漂流计划</a>中白嫖一个。</p>
-<h2 id="获取应用">获取应用
-</h2><p>丢掉所有的工作流和坑，只是拽源码打包的话，你应该在</p>
+    <p>要不，你先看看<a class="link" href="https://www.debian.org/doc/manuals/maint-guide/index.en.html"  target="_blank" rel="noopener"
+    >这个万能的手册</a>？</p>
+<h2 id="工作流">工作流
+</h2><p>具体的工作流在<a class="link" href="https://wiki.deepin.org/zh/06_%E5%85%B3%E4%BA%8EDeepin/Deepin%E6%B4%BB%E5%8A%A8/%E7%94%B2%E8%BE%B0%E8%AE%A1%E5%88%92/intro"  target="_blank" rel="noopener"
+    >这里</a>中有介绍。简言之，我们只要关注有问题的包和干脆没有的包即可，如果这个包只是版本不够，那你只要找你的 mentor 然后请求升级即可，当然如果遇到了版本锁死的情况另说。</p>
+<p>什么是没有的包？简言之就是在你的本机上无论通过二进制源还是源码源都无法下载的包。这一点很重要，由于 deepin 构建系统中有一些容量过大或临时放入的包只有 obs 中有而 github 上没有，我们只能按照用户最终面向为准。</p>
+<p>如果你恰巧找到了这样一个不存在的包，比如我最早修的 ocaml-augeas ，那么大致的流程是这样的：</p>
+<p>首先，在 <a class="link" href="https://github.com/deepin-community/Repository-Manager"  target="_blank" rel="noopener"
+    >repository-manager</a> 中添加这个不存在的包（注意，是缺失的包对应的源码包）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l">ocaml-augeas</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l">deepin-sysdev-team</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">info</span><span class="p">:</span><span class="w"> </span><span class="l">OCaml bindings to the Augeas configuration library</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这些信息可以在 <a class="link" href="https://packages.debian.org/source/sid/ocaml-augeas"  target="_blank" rel="noopener"
+    >ocaml-augeas对应的源码包提供处</a> 找到，如果你找不到这个网站可以直接在 Google 中搜索 <code>debian package search</code> 然后第一条或者第二条就是。填写完信息之后进行 pr 。</p>
+<p>过一段时间（但你最好还是私信一下你的 mentor 丢一下你的 pr 链接）后系统就会自动创建模板 repo ， fork 一份然后 clone 到本地，在打包结束后使用。</p>
+<p>接下来把源码包下载到本机：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget http://deb.debian.org/debian/pool/main/o/ocaml-augeas/ocaml-augeas_0.6-2.dsc
+</span></span><span class="line"><span class="cl">wget http://deb.debian.org/debian/pool/main/o/ocaml-augeas/ocaml-augeas_0.6.orig.tar.gz
+</span></span><span class="line"><span class="cl">wget http://deb.debian.org/debian/pool/main/o/ocaml-augeas/ocaml-augeas_0.6-2.debian.tar.xz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解包：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo vim /etc/apt/sources.list
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">dpkg-source -x *.dsc
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>将 community 和 ci 源对应行复制粘贴，并将粘贴行前的 <code>deb</code> 改为 <code>deb-src</code> 。这两个源码源是最终我们确定一个软件包是否真实存在的最终判据，具体原因在《给 deepin 修包（入世篇）》进行讲解。</p>
-<p>假设说你要打 <code>gperf</code> ，那你可以使用</p>
+</div><p>接下来我们需要进入源码目录并应用源码目录内的补丁，这里涉及到了 <code>dquilt</code> 命令，对于 bash 的构建方法在<a class="link" href="https://www.debian.org/doc/manuals/maint-guide/modify.en.html"  target="_blank" rel="noopener"
+    >这里</a>。简言之，你要修改 <code>~/.bashrc</code> 和 <code>~/.dquiltrc-dpkg</code> 两个文件如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt <span class="nb">source</span> gperf
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">dquilt</span><span class="o">=</span><span class="s2">&#34;quilt --quiltrc=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/.quiltrc-dpkg&#34;</span>
+</span></span><span class="line"><span class="cl">. /usr/share/bash-completion/completions/quilt
+</span></span><span class="line"><span class="cl"><span class="nb">complete</span> -F _quilt_completion -o filenames dquilt
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>获得源码包。</p>
-<h2 id="创建一个干净的-rootfs">创建一个干净的 rootfs
-</h2><p>为了防止你打的包被奇怪的依赖项干扰，确保这个包能够在所有的同系统环境下工作，我们需要创建一个干净的 rootfs 并在内部操作打包的其他操作。注意这里所有的修包的改动都应在新建的 rootfs 之外完成，否则文件从 rootfs 移出后所属用户和用户组依然为 root ，会为后续工作带来不便。</p>
-<p>以下命令看起来多而复杂，实际上使用的时候中间打分号然后复制粘贴即可。</p>
-<p>使用如下的命令可以创建一个 rootfs 并把刚才获得的 gperf 丢到 rootfs 中打包。</p>
-<div class="highlight"><div class="chroma">
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -403,124 +435,111 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir rootfs <span class="p">;</span> <span class="nb">cd</span> rootfs
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 通过软件源构建 rootfs</span>
-</span></span><span class="line"><span class="cl">sudo mmdebstrap &lt; /etc/apt/sources.list &gt; chroot.tar
-</span></span><span class="line"><span class="cl">sudo tar xvf chroot.tar
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 一些 java 和日志相关的依赖需要这三个根目录的子目录，进行挂载</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 如果你在修包的半路重启了开发板，应当重新挂载这三个目录</span>
-</span></span><span class="line"><span class="cl">sudo mount --bind /dev ./dev
-</span></span><span class="line"><span class="cl">sudo mount --bind /proc ./proc
-</span></span><span class="line"><span class="cl">sudo mount --bind /sys ./sys
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 这个新的 rootfs 没有 bash 高亮之类的我们熟悉的功能，把 dotfile 丢进去</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># quiltrc-dpkg 是什么在《入世篇》说...</span>
-</span></span><span class="line"><span class="cl">sudo cp ~/.bashrc ~/.quiltrc-dpkg ./root
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 一股脑把要打包的东西全丢进来</span>
-</span></span><span class="line"><span class="cl">sudo cp -r ../gperf* ./root
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 进入 rootfs</span>
-</span></span><span class="line"><span class="cl">sudo chroot .
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">d</span><span class="o">=</span>. <span class="p">;</span> <span class="k">while</span> <span class="o">[</span> ! -d <span class="nv">$d</span>/debian -a <span class="k">$(</span>readlink -e <span class="nv">$d</span><span class="k">)</span> !<span class="o">=</span> / <span class="o">]</span><span class="p">;</span> <span class="k">do</span> <span class="nv">d</span><span class="o">=</span><span class="nv">$d</span>/..<span class="p">;</span> <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -d <span class="nv">$d</span>/debian <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -z <span class="nv">$QUILT_PATCHES</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># if in Debian packaging tree with unset $QUILT_PATCHES</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">QUILT_PATCHES</span><span class="o">=</span><span class="s2">&#34;debian/patches&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">QUILT_PATCH_OPTS</span><span class="o">=</span><span class="s2">&#34;--reject-format=unified&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">QUILT_DIFF_ARGS</span><span class="o">=</span><span class="s2">&#34;-p ab --no-timestamps --no-index --color=auto&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">QUILT_REFRESH_ARGS</span><span class="o">=</span><span class="s2">&#34;-p ab --no-timestamps --no-index&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">QUILT_COLORS</span><span class="o">=</span><span class="s2">&#34;diff_hdr=1;32:diff_add=1;34:diff_rem=1;31:diff_hunk=1;33:diff_ctx=35:diff_cctx=33&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> ! <span class="o">[</span> -d <span class="nv">$d</span>/debian/patches <span class="o">]</span><span class="p">;</span> <span class="k">then</span> mkdir <span class="nv">$d</span>/debian/patches<span class="p">;</span> <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>接下来就在这个新环境中操作&hellip;&hellip;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 将 locale 退回 POSIX ，防止 locale 缺失依赖导致的终端输出混乱</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 这个 unset 每次推出并进入 rootfs 都应该运行一次</span>
-</span></span><span class="line"><span class="cl"><span class="nb">unset</span> LANG <span class="p">;</span> <span class="nb">unset</span> LANGUAGE
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 由于 apt 默认对 ca-certificates 进行校验而我们的 rootfs 中没有对应的证书，暂时绕过它，安装证书</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;Acquire::https::Verify-Peer &#34;false&#34;;&#39;</span> &gt; /etc/apt/apt.conf.d/99verify
-</span></span><span class="line"><span class="cl">apt update
-</span></span><span class="line"><span class="cl">apt install -y ca-certificates
-</span></span><span class="line"><span class="cl">rm /etc/apt/apt.conf.d/99verify
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 安装修包需要的基本依赖</span>
-</span></span><span class="line"><span class="cl">apt install debhelper build-essential devscripts quilt pristine-tar lintian
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> gperf-3.1/
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 避免循环依赖设置环境变量，然后安装源码包构建时需要的依赖</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">DEB_BUILD_PROFILES</span><span class="o">=</span>nocheck <span class="p">;</span> apt build-dep .
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 打包！</span>
-</span></span><span class="line"><span class="cl">dpkg-buildpackage -j8 -us -uc
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>如果最后出现了 <code>complete</code> 之类的字样，恭喜你，打包成功。不过还得检查一下包的质量&hellip;&hellip;</p>
+</div><p>但我用 fish ，而 fish 自带的补全功能已经足够了，所以对 <code>~/.config/fish/config.fish</code> 的修改就相对简单一些：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">lintian ../*.changes
+<pre tabindex="0" class="chroma"><code class="language-fish" data-lang="fish"><span class="line"><span class="cl"><span class="nb">alias </span><span class="nv">dquilt</span><span class="o">=</span><span class="s2">&#34;quilt --quiltrc=</span><span class="nv">$HOME</span><span class="s2">/.quiltrc-dpkg&#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这里的输出信息可能很多，尤其许多软件包本身不是在 RISC-V 设备上进行首次构建的，所以绝大多数关于 architecture 的警告都可以忽略，只要检查诸如不可复现之类的架构无关的错误即可。具体的信息在<a class="link" href="https://lintian.debian.org/index.html"  target="_blank" rel="noopener"
-    >lintian tags</a>中有介绍。</p>
-<p>如果 lintian 的检查通过了，那你的包理论上就应该没什么问题了。</p>
-<p>但是这只是一个没什么坑的包，甚至是一个游离于整个 deepin 工作流之外的早已稳定的包，而且 debian 文件夹是什么，循环依赖又是什么，这里都没有解释。这些内容等到《入世篇》再说。</p>
-<p>工作完成后就可以释放打包的空间了：</p>
+</div><p>这不意味着如果你使用别的 shell 那最一开始对 bashrc 的修改就没用了，你在新创建的 rootfs 中还是得乖乖用 bash 。</p>
+<p>进入源码目录，然后使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">dquilt pop -a
+</span></span><span class="line"><span class="cl">rm -rf .pc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>进行源码修复。修复后按照正常流程创建 rootfs 然后查看打包是否成功。打包后把最开始 clone 的模板仓库中的版本管理和自动化相关组件丢到源码目录中，举例的话是这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mv ../ocaml-augeas/.git ./
+</span></span><span class="line"><span class="cl">mv ../ocaml-augeas/.github ./
+</span></span><span class="line"><span class="cl">mv ../ocaml-augeas/debian/deepin ./debian
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后提交&hellip;&hellip;</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 退出rootfs</span>
-</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 取消挂载</span>
-</span></span><span class="line"><span class="cl">sudo umount ./dev <span class="p">;</span> sudo umount ./proc <span class="p">;</span> sudo umount ./sys
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 删除 rootfs ，这里不使用 sudo 会由于权限不足无法删除。</span>
-</span></span><span class="line"><span class="cl">sudo rm -rf rootfs
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit
+</span></span><span class="line"><span class="cl"><span class="c1"># 这里的commit message 应当遵守semantic commit中的一般原则，如“feat: update ocaml-augeas to 0.6-2”</span>
+</span></span><span class="line"><span class="cl">git push
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>然后 pr ，在 <code>/ok-to-test</code> 和 <code>/integrate</code> 之后你就得到了两份产出。</p>
+<h2 id="循环依赖">循环依赖
+</h2><p>对于一些源码包，如 <code>supermin</code> 和 <code>libguestfs</code> ，涉及到了两个软件包都缺失而在 Dependencies 字段中互相依赖的场景，但其中一方可能只在某几项测试中使用了这个依赖。这时候就应该在 <code>debian/control</code> 中涉及循环依赖的包后方添加 <code>&lt;!nocheck&gt;</code> ，然后在安装剩下的依赖时使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">DEB_BUILD_PROFILES</span><span class="o">=</span>nocheck
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p>绕开这些依赖进行后续的依赖安装。</p>
+<h2 id="改动源码之后的打包流程">改动源码之后的打包流程
+</h2><p>dpkg-buildpackage 在打包时会严格检查你的包和上游的 orig.tar.gz 是否能够对应，如果你做了修改而继续使用原有的源码包进行打包会导致打包失败。这种情况下我们应该重新构建源码包（以下构建流程假定你的源码目录为 repo ，参考来源：<a class="link" href="https://github.com/atlarator/buildpackage-deepin"  target="_blank" rel="noopener"
+    >buildpackage-deepin</a>）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">pushd</span> repo <span class="p">;</span> dh_testdir <span class="p">;</span> dh_quilt_unpatch <span class="p">;</span> <span class="nv">PACKAGE</span><span class="o">=</span><span class="k">$(</span>dpkg-parsechangelog -S <span class="nb">source</span><span class="k">)</span> <span class="p">;</span> <span class="nv">VERSION</span><span class="o">=</span><span class="k">$(</span>dpkg-parsechangelog -S Version <span class="p">|</span> rev <span class="p">|</span> cut -d <span class="s1">&#39;-&#39;</span> -f 2- <span class="p">|</span> cut -f1 -d <span class="s1">&#39;:&#39;</span> <span class="p">|</span> rev<span class="k">)</span> <span class="p">;</span> <span class="nv">tmpdir</span><span class="o">=</span><span class="k">$(</span>mktemp -d<span class="k">)</span> <span class="p">;</span> mv debian/ <span class="nv">$tmpdir</span>/ <span class="p">;</span> <span class="nv">TAR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$PACKAGE</span><span class="s2">&#34;</span>_<span class="s2">&#34;</span><span class="nv">$VERSION</span><span class="s2">.orig.tar.gz&#34;</span> <span class="p">;</span> tar -czf ../<span class="nv">$TAR</span> . <span class="p">;</span> mv <span class="nv">$tmpdir</span>/debian . <span class="p">;</span> <span class="nb">popd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后正常地安装依赖并进行打包即可。</p>
+<h2 id="github-actions">github actions
+</h2><p>一些源码中可能包含一些自带的 github actions ，在打包前把它们删掉，然后按照“改动源码之后的打包流程”进行打包即可。原有的 github actions 可能导致 CI 算力浪费从而减慢整个系统的构建。</p>
+<h2 id="新时代的千年虫">新时代的千年虫
+</h2><p>time_t 这个 type 在 32-bit 机器上是32位，而在 64-bit 机器上是64位，32位的 time_t 会在2038年溢出，于是 Debian 官方在2023年末至2024年初开始了 <code>t64-transition</code> ，具体的细节在<a class="link" href="https://wiki.debian.org/ReleaseGoals/64bit-time"  target="_blank" rel="noopener"
+    >这里</a>，长话短说就是进行 ABI 替换。但是这个文档中有这样一句话：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">64-bit architectures are not affected by the Y2k38 problem, but they are affected by this transition.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也就是说对于我们现在工作使用的 RISC-V 64 架构来说这个改动唯一的变化就是更改了产出二进制包的后缀进而导致调用版本问题。具体的修正方法是首先修改 control 对应的条目，规则在<a class="link" href="https://www.debian.org/doc/manuals/maint-guide/dreq.en.html"  target="_blank" rel="noopener"
+    >这里</a>。你需要把 t64 后缀的 Package 名修正，然后删掉对应的 Break 和 Replace 字段，之后退出 control ，删除 t64 对应的 lintian-override ，重命名 t64 后缀的 install ，然后再在 symbols 中删除第一行中的 t64 后缀，之后按照正常流程打包即可。</p>
+<p>11月左右 deepin26 将会迁往 RVA23 ，届时会有大量的额外工作，《灭世篇》就得届时再更新了。最后，别忘了看万能的 <a class="link" href="https://www.debian.org/doc/manuals/maint-guide/index.en.html"  target="_blank" rel="noopener"
+    >manual</a> 。</p>
+
 </section>
 
 

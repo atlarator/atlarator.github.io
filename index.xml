@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>VZstless</copyright>
-    <lastBuildDate>Wed, 22 Oct 2025 15:07:02 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Oct 2025 16:51:44 +0800</lastBuildDate>
     <atom:link href="https://vzstless.moe/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>给 deepin 修包（入世篇）</title>
+      <link>https://vzstless.moe/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%85%A5%E4%B8%96%E7%AF%87/</link>
+      <pubDate>Thu, 23 Oct 2025 16:51:44 +0800</pubDate>
+      <guid>https://vzstless.moe/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%85%A5%E4%B8%96%E7%AF%87/</guid>
+      <description>&lt;p&gt;要不，你先看看&lt;a href=&#34;https://www.debian.org/doc/manuals/maint-guide/index.en.html&#34;&gt;这个万能的手册&lt;/a&gt;？&lt;/p&gt;&#xA;&lt;h2 id=&#34;工作流&#34;&gt;工作流&lt;/h2&gt;&#xA;&lt;p&gt;具体的工作流在&lt;a href=&#34;https://wiki.deepin.org/zh/06_%E5%85%B3%E4%BA%8EDeepin/Deepin%E6%B4%BB%E5%8A%A8/%E7%94%B2%E8%BE%B0%E8%AE%A1%E5%88%92/intro&#34;&gt;这里&lt;/a&gt;中有介绍。简言之，我们只要关注有问题的包和干脆没有的包即可，如果这个包只是版本不够，那你只要找你的 mentor 然后请求升级即可，当然如果遇到了版本锁死的情况另说。&lt;/p&gt;&#xA;&lt;p&gt;什么是没有的包？简言之就是在你的本机上无论通过二进制源还是源码源都无法下载的包。这一点很重要，由于 deepin 构建系统中有一些容量过大或临时放入的包只有 obs 中有而 github 上没有，我们只能按照用户最终面向为准。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>给 deepin 修包（创世篇）</title>
       <link>https://vzstless.moe/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%88%9B%E4%B8%96%E7%AF%87/</link>
