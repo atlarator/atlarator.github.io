@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>VZstless</copyright>
-    <lastBuildDate>Thu, 23 Oct 2025 16:51:44 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 Oct 2025 09:51:08 +0800</lastBuildDate>
     <atom:link href="https://vzstless.moe/tags/plct%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在荔枝派4A上玩《心跳文学部》</title>
+      <link>https://vzstless.moe/p/%E5%9C%A8%E8%8D%94%E6%9E%9D%E6%B4%BE4a%E4%B8%8A%E7%8E%A9%E5%BF%83%E8%B7%B3%E6%96%87%E5%AD%A6%E9%83%A8/</link>
+      <pubDate>Fri, 24 Oct 2025 09:51:08 +0800</pubDate>
+      <guid>https://vzstless.moe/p/%E5%9C%A8%E8%8D%94%E6%9E%9D%E6%B4%BE4a%E4%B8%8A%E7%8E%A9%E5%BF%83%E8%B7%B3%E6%96%87%E5%AD%A6%E9%83%A8/</guid>
+      <description>&lt;p&gt;呃，虽说我写了这篇教程但是我还是希望这篇教程你会用不上。 deepin 的应用上传据不可靠消息支持了 RISC-V ，如果他们审核通过了那你直接下载 renpy 然后开袋即食即可。&lt;/p&gt;&#xA;&lt;p&gt;警告：心跳文学部是一款带有恐怖要素和致郁要素的视觉小说游戏，心理承受能力较差者请谨慎游玩！&lt;/p&gt;</description>
+    </item>
     <item>
       <title>给 deepin 修包（入世篇）</title>
       <link>https://vzstless.moe/p/%E7%BB%99-deepin-%E4%BF%AE%E5%8C%85%E5%85%A5%E4%B8%96%E7%AF%87/</link>
